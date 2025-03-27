@@ -1,0 +1,57 @@
+/* Dark themed background and overall styling */
+body {
+    background-color: #0D0D0D;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    min-height: 100vh;
+    /* Using flex to center the canvas container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Container for the canvases */
+  .canvas {
+    position: relative;
+    width: 500px;
+    height: 500px;
+  }
+  
+  /* Ensure all canvas elements are layered on top of one another */
+  .canvas canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  /* Position Player 1 details on the left side (vertically centered) */
+  .player1-details {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
+  /* Position Player 2 details on the top right */
+  .player2-details {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  #timeLeft {
+    position: absolute;
+    font-size: large;
+    top: 20px;
+  }
+  /* Basic styling for headings and paragraphs */
+  h2 {
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  

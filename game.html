@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shooter Game</title>
+    <link rel="stylesheet" href="game_style.css" />
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />
+  </head>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J0P29Z62S3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J0P29Z62S3');
+</script>
+
+  <body>
+    <div class="canvas">
+      <canvas id="gameArea" height="500" width="500"></canvas>
+      <canvas id="player1" height="500" width="500"></canvas>
+      <canvas id="player2" height="500" width="500"></canvas>
+    </div>
+
+    <div class="player1-details">
+      <h2 id="player1_name">Player 1</h2>
+      <p>Score: <span id="player1_score" style="color: #39ff14">0</span></p>
+    </div>
+
+    <div class="player2-details">
+      <h2 id="player2_name">Player 2</h2>
+      <p>Score: <span id="player2_score" style="color: #31a2ff">0</span></p>
+    </div>
+
+    <p id="timeLeft"></p>
+
+    <script src="game_script.js"></script>
+  </body>
+</html>

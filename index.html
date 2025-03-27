@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: sans-serif;
+        background: #000;
+        color: #fff;
+        text-align: center;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+
+      .typed-text {
+        color: #de8512;
+        font-size: 30px;
+      }
+
+      .cursor {
+        color: #dbe912;
+        animation: blinkAnimation 800ms infinite;
+        font-size: 30px;
+      }
+
+      @keyframes blinkAnimation {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        25%,
+        75% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 1.8rem;
+        color: #de8512;
+      }
+
+      .instructions,
+      .rules {
+        width: 80%;
+        max-width: 600px;
+        text-align: left;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      .highlight {
+        color: #39ff14;
+        font-weight: bold;
+      }
+
+      .play-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        color: #000;
+        background: #ffd700;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+      }
+
+      .play-button:hover {
+        background: #ffcc00;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <span class="typed-text"></span>
+      <span class="cursor">|</span>
+    </p>
+
+    <h2>Game Controls</h2>
+    <br>
+    <div class="instructions">
+      <ul>
+        <li><span class="highlight">Player 1 Controls:</span> Use <strong>W, A, S, D</strong> to move and press <strong>E</strong> to shoot.</li>
+        <li><span class="highlight">Player 2 Controls:</span> Use <strong>Arrow Keys</strong> to move and press <strong>/</strong> to shoot.</li>
+      </ul>
+    </div>
+
+    <h2>Game Rules</h2>
+    <br>
+    <div class="rules">
+      <ul>
+        <li><span class="highlight">+30 points</span> for hitting the opponent.</li>
+        <li><span class="highlight">-10 points</span> if you get hit by a bullet.</li>
+        <li><span class="highlight">-1 point</span> for every bullet shot.</li>
+        <li>The game lasts for <span class="highlight">60 seconds</span>. Score as high as you can!</li>
+      </ul>
+    </div>
+
+    <a href="game.html" class="play-button">Play Game</a>
+
+    <script src="home_script.js"></script>
+  </body>
+</html>
