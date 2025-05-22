@@ -31,6 +31,7 @@ const time_left_elem = document.getElementById("timeLeft");
 const canvas = document.getElementById("gameArea");
 const bgctx = canvas.getContext("2d");
 const canvasColor = "#111111"; //Colour of the canvas (arena)
+const ammoPadColor = "#1b1b1b"
 
 //For Player 1
 const ctx1 = document.getElementById("player1").getContext("2d");
@@ -49,8 +50,8 @@ function startNewGame(d = arena_size) {
         return;
     }
 
-    bgctx.strokeStyle = "white";
 
+    bgctx.strokeStyle = "white";
     //To draw the canvas box
     bgctx.fillStyle = canvasColor;
     bgctx.beginPath();
@@ -60,22 +61,36 @@ function startNewGame(d = arena_size) {
     bgctx.lineTo(0, d);
     bgctx.lineTo(0, 0);
     bgctx.fill();
+    bgctx.stroke();
+
+    bgctx.fillStyle = ammoPadColor;
+    bgctx.beginPath();
+    bgctx.moveTo(d / 3, d / 3);
+    bgctx.lineTo(2 * d / 3, d / 3);
+    bgctx.lineTo(2 * d / 3, 2 * d / 3);
+    bgctx.lineTo(d / 3, 2 * d / 3);
+    bgctx.lineTo(d / 3, d / 3);
+    bgctx.fill();
+
 
     //To draw the boundary at the middle
+    bgctx.strokeStyle = "white"
+    bgctx.beginPath();
     bgctx.moveTo(d / 2, 0);
     bgctx.lineTo(d / 2, d);
     bgctx.stroke();
+
 
     time_left_elem.innerText = time_left;
 
     //Add initial player details on the page
     player1_score_element.innerText = player1.score;
-    player1_bullet_speed_element.innerText = Number(1000/player1.bullet_time_period).toFixed(2)
+    player1_bullet_speed_element.innerText = Number(1000 / player1.bullet_time_period).toFixed(2)
     ctx1.fillStyle = player1.color;
     ctx1.fillRect(0, d / 2, player_size, player_size);
 
     player2_score_element.innerText = player2.score;
-    player2_bullet_speed_element.innerText = Number(1000/player2.bullet_time_period).toFixed(2)
+    player2_bullet_speed_element.innerText = Number(1000 / player2.bullet_time_period).toFixed(2)
     ctx2.fillStyle = player2.color;
     ctx2.fillRect(d - player_size, d / 2, player_size, player_size);
 }
@@ -94,7 +109,18 @@ function redraw_arena(d = arena_size) {
     bgctx.lineTo(0, d);
     bgctx.lineTo(0, 0);
     bgctx.fill();
+    bgctx.stroke();
 
+    bgctx.fillStyle = ammoPadColor;
+    bgctx.beginPath();
+    bgctx.moveTo(d / 3, d / 3);
+    bgctx.lineTo(2 * d / 3, d / 3);
+    bgctx.lineTo(2 * d / 3, 2 * d / 3);
+    bgctx.lineTo(d / 3, 2 * d / 3);
+    bgctx.lineTo(d / 3, d / 3);
+    bgctx.fill();
+
+    bgctx.beginPath();
     bgctx.moveTo(d / 2, 0);
     bgctx.lineTo(d / 2, d);
     bgctx.stroke();
@@ -122,10 +148,10 @@ function shoot1(p, q) {
             player1.score += target_hit_score;
             player1_score_element.innerText = player1.score;
             //update the bullet speeds
-            player1_bullet_speed_element.innerText = Number(1000/player1.bullet_time_period).toFixed(2)
-            player2_bullet_speed_element.innerText = Number(1000/player2.bullet_time_period).toFixed(2)
+            player1_bullet_speed_element.innerText = Number(1000 / player1.bullet_time_period).toFixed(2)
+            player2_bullet_speed_element.innerText = Number(1000 / player2.bullet_time_period).toFixed(2)
             player2.score -= damage_score;
-            if(player1.bullet_time_period < 40) player1.bullet_time_period += 0.5;
+            if (player1.bullet_time_period < 40) player1.bullet_time_period += 0.5;
             if (player2.bullet_time_period > 20) player2.bullet_time_period -= 0.5; //if player1 hits player2 then bullet speed of player2 increases. This is done, for fair play.
             player2_score_element.innerText = player2.score;
             ctx1.clearRect(p, q, player_size / 2.5, player_size / 2.5); //removes the bullet, once hit the target
@@ -160,10 +186,10 @@ function shoot2(p, q) {
             player2.score += target_hit_score;
             player2_score_element.innerText = player2.score;
             //update the bullet speeds
-            player1_bullet_speed_element.innerText = Number(1000/player1.bullet_time_period).toFixed(2)
-            player2_bullet_speed_element.innerText = Number(1000/player2.bullet_time_period).toFixed(2)
+            player1_bullet_speed_element.innerText = Number(1000 / player1.bullet_time_period).toFixed(2)
+            player2_bullet_speed_element.innerText = Number(1000 / player2.bullet_time_period).toFixed(2)
             player1.score -= damage_score;
-            if(player2.bullet_time_period < 40) player2.bullet_time_period += 0.5;
+            if (player2.bullet_time_period < 40) player2.bullet_time_period += 0.5;
             if (player1.bullet_time_period > 20) player1.bullet_time_period -= 0.5;
             player1_score_element.innerText = player1.score;
             ctx2.clearRect(p, q, player_size / 2.5, player_size / 2.5);
@@ -283,12 +309,10 @@ function hit_detection(p, q, player_number) {
         player_number == 1 &&
         Math.abs(p - player2.X) <= 8 &&
         Math.abs(player2.Y - q) <= 8
-    )
-    {
+    ) {
 
         return true;
-    }
-    else if (
+    } else if (
         player_number == 2 &&
         Math.abs(p - player1.X) <= 8 &&
         Math.abs(player1.Y - q) <= 8
@@ -355,7 +379,7 @@ window.addEventListener("keyup", (e) => {
             shoot1(player1.X + player_size, player1.Y + player_size / 2.5);
             break;
 //! will change
-        case "KeyM":
+        case "Slash":
             shoot2(player2.X - player_size, player2.Y + player_size / 2.5);
             break;
     }
