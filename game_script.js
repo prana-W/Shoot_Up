@@ -35,10 +35,12 @@ const canvasColor = "#111111"; //Colour of the canvas (arena)
 //For Player 1
 const ctx1 = document.getElementById("player1").getContext("2d");
 const player1_score_element = document.getElementById("player1_score");
+const player1_bullet_speed_element = document.getElementById("player1_bullet_speed");
 
 //For Player 2
 const ctx2 = document.getElementById("player2").getContext("2d");
 const player2_score_element = document.getElementById("player2_score");
+const player2_bullet_speed_element = document.getElementById("player2_bullet_speed");
 
 //creates the arena at the start of the game
 function startNewGame(d = arena_size) {
@@ -68,10 +70,12 @@ function startNewGame(d = arena_size) {
 
     //Add initial player details on the page
     player1_score_element.innerText = player1.score;
+    player1_bullet_speed_element.innerText = Number(1000/player1.bullet_time_period).toFixed(2)
     ctx1.fillStyle = player1.color;
     ctx1.fillRect(0, d / 2, player_size, player_size);
 
     player2_score_element.innerText = player2.score;
+    player2_bullet_speed_element.innerText = Number(1000/player2.bullet_time_period).toFixed(2)
     ctx2.fillStyle = player2.color;
     ctx2.fillRect(d - player_size, d / 2, player_size, player_size);
 }
@@ -117,7 +121,12 @@ function shoot1(p, q) {
         if (hit_detection(p, q, 1)) {
             player1.score += target_hit_score;
             player1_score_element.innerText = player1.score;
+            //update the bullet speeds
+            player1_bullet_speed_element.innerText = Number(1000/player1.bullet_time_period).toFixed(2)
+            player2_bullet_speed_element.innerText = Number(1000/player2.bullet_time_period).toFixed(2)
             player2.score -= damage_score;
+            if(player1.bullet_time_period < 40) player1.bullet_time_period += 0.5;
+            if (player2.bullet_time_period > 20) player2.bullet_time_period -= 0.5; //if player1 hits player2 then bullet speed of player2 increases. This is done, for fair play.
             player2_score_element.innerText = player2.score;
             ctx1.clearRect(p, q, player_size / 2.5, player_size / 2.5); //removes the bullet, once hit the target
             add_blood(player2.X, player2.Y); //add blood effect to player 2
@@ -150,7 +159,12 @@ function shoot2(p, q) {
         if (hit_detection(p, q, 2)) {
             player2.score += target_hit_score;
             player2_score_element.innerText = player2.score;
+            //update the bullet speeds
+            player1_bullet_speed_element.innerText = Number(1000/player1.bullet_time_period).toFixed(2)
+            player2_bullet_speed_element.innerText = Number(1000/player2.bullet_time_period).toFixed(2)
             player1.score -= damage_score;
+            if(player2.bullet_time_period < 40) player2.bullet_time_period += 0.5;
+            if (player1.bullet_time_period > 20) player1.bullet_time_period -= 0.5;
             player1_score_element.innerText = player1.score;
             ctx2.clearRect(p, q, player_size / 2.5, player_size / 2.5);
 
